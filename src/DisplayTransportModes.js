@@ -1,11 +1,15 @@
 import React, {useState} from "react";
-import Data from "./Data";
+import SelectLines from './SelectLines'
+
+
 
 const DisplayTransportModes = (props) => {
-    const [selected, setSelected] = useState("bus")
+    const [selected, setSelected] = useState()
 return(
-   <div>
-      <select onChange = {e => setSelected(e.currentTarget.value)}>
+   <div className="mb-4">
+      <select className = "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      onChange = {e => setSelected(e.currentTarget.value)}>
+      <option>Choose a Mode of Transport...</option>
           {props.transportData.map((mode,index) =>  {
         return(
         <option value = {mode.modeName} key= {index}> { mode.modeName} </option>
@@ -15,6 +19,8 @@ return(
           </select> 
 
         <p>You selected mode: {selected} </p>
+  {selected ?   <SelectLines data = {selected}  />: null }
+   
    </div>
 )
 }
